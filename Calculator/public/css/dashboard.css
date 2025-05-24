@@ -1,0 +1,160 @@
+/* === Analytics Dashboard Styles === */
+.analytics-dashboard {
+    margin-bottom: 2.5rem;
+    padding: 1.5rem 0;
+    animation: dashboardAppear 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+
+.analytics-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.5rem;
+    color: var(--main-accent);
+    letter-spacing: 0.04em;
+}
+
+.metrics-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.metric-box {
+    background: var(--panel-bg);
+    border-radius: 1.25rem;
+    box-shadow: var(--elevation);
+    padding: 1.25rem 1rem;
+    min-width: 180px;
+    flex: 1 1 200px;
+    text-align: center;
+    transition: box-shadow 0.25s, transform 0.25s;
+    opacity: 0;
+    animation: metricFadeIn 0.6s forwards;
+}
+
+.metric-box:not(:first-child) { margin-left: 0.5rem; }
+
+.metric-box[data-type="growth"] .metric-icon { color: #1b9aaa; }
+.metric-box[data-type="trend"] .metric-icon { color: #f3722c; }
+.metric-box[data-type="volume"] .metric-icon { color: #43aa8b; }
+.metric-box[data-type="volatility"] .metric-icon { color: #f94144; }
+
+.metric-box:hover {
+    box-shadow: 0 6px 24px rgba(30, 144, 255, 0.09);
+    transform: translateY(-6px) scale(1.04);
+}
+
+.metric-icon {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.metric-title {
+    font-size: 1.05rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+    font-weight: 500;
+}
+
+.metric-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--main-accent);
+    margin-bottom: 0.25rem;
+    transition: color 0.3s;
+}
+
+.metric-value.animated {
+    animation: metricHighlight 0.9s;
+}
+
+.metric-desc {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    opacity: 0.82;
+}
+
+.theme-toggle-btn {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--main-accent);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--elevation);
+    z-index: 100;
+    transition: transform 0.2s;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.09) rotate(-8deg);
+}
+
+.theme-toggle-btn i {
+    font-size: 1.4rem;
+}
+
+/* --- Theme Variables --- */
+:root {
+    --main-accent: #1976d2;
+    --panel-bg: #f7fafd;
+    --text-main: #222;
+    --text-secondary: #444;
+    --elevation: 0 4px 18px rgba(25, 118, 210, 0.08);
+}
+
+[data-theme="dark"] {
+    --main-accent: #90caf9;
+    --panel-bg: #232a34;
+    --text-main: #e3e3e3;
+    --text-secondary: #b0b0b0;
+    --elevation: 0 8px 28px rgba(144, 202, 249, 0.10);
+}
+
+/* --- Animations --- */
+@keyframes dashboardAppear {
+    0% { opacity: 0; transform: translateY(30px);}
+    100% { opacity: 1; transform: translateY(0);}
+}
+
+@keyframes metricFadeIn {
+    from { opacity: 0; transform: translateY(40px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+
+@keyframes metricHighlight {
+    0% { color: #ffd166; }
+    80% { color: #ffd166; }
+    100% { color: var(--main-accent); }
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+    .metrics-row {
+        flex-direction: column;
+        gap: 1.2rem;
+    }
+    .metric-box {
+        min-width: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .analytics-title {
+        font-size: 1.15rem;
+    }
+    .metric-value {
+        font-size: 1.25rem;
+    }
+    .theme-toggle-btn {
+        width: 40px; height: 40px;
+    }
+}
